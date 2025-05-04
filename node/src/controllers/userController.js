@@ -1,5 +1,5 @@
 const userService = require("../services/userService");
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 const fs = require('fs');
 const path = require('path');
 

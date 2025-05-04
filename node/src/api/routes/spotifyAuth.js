@@ -10,6 +10,10 @@ const CLIENT_ID = process.env.SPOTIFY_CLIENT_ID;
 const CLIENT_SECRET = process.env.SPOTIFY_CLIENT_SECRET;
 const REDIRECT_URI = process.env.REDIRECT_URL;
 const FRONTEND_URL = process.env.FRONTEND_URL;
+<<<<<<< HEAD
+=======
+
+>>>>>>> 6019f6d7 (Updated commit)
 
 // LOGIN - Redirect to Spotify Authorization URL
 router.get('/login', (req, res) => {
