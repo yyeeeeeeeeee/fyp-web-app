@@ -1,0 +1,45 @@
+
+/* General Styles */
+.custom-nav {
+    background-color: #94c1ee; 
+    border-radius: 0px;
+    padding: 20px;
+  }
+  
+  /* Navigation Links */
+  .custom-nav .nav-link {
+    color: white !important; 
+    font-size: 18px;
+    font-weight: 500;
+    transition: background 0.3s ease-in-out, color 0.3s;
+    border-radius: 8px;
+    padding: 8px 15px;
+  }
+  
+  /* Hover Effect */
+  .custom-nav .nav-link:hover {
+    color: #1A1A2E !important;
+  }
+  
+  /* Footer Text */
+  p {
+    color: white;
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-size: 16px;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 700px) {
+    .custom-nav {
+      padding: 10px;
+    }
+    .custom-nav .nav-link {
+      font-size: 16px;
+      padding: 6px 12px;
+    }
+    .footer-text {
+      font-size: 12px;
+    }
+  }

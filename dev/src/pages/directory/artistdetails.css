@@ -1,0 +1,229 @@
+.artist-details-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    width: 100%;
+    height: 100%;
+    background-color: #c8dcf2;
+  }
+  
+  .artist-details-body {
+    width: 100%;
+    max-width: 1400px;
+    padding: 30px 0px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    background-color: #d5e2f0;
+  }
+  
+  .artist-details-top {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 20px;
+    margin: 20px;
+    background: rgba(156, 181, 235, 0.733);
+    border-radius: 20px;
+  }
+  
+  .artist-info {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .artist-img {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 50px;
+  }
+  
+  .artist-desc {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .artist-name {
+    font-size: 3rem;
+    font-weight: 700;
+    color: #131313;
+    margin-bottom: 0;
+  }
+  
+  .artist-type {
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: #000000;
+  }
+
+  .artist-followers {
+    font-size: 1rem;
+    font-weight: 500;
+    color: #464444;
+  }
+  
+  .artist-details-bottom {
+    display: flex;
+    align-items: center;
+    margin: 50px 0;
+    justify-content: center;
+  }
+  
+  .bottom-body {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 50px;
+  }
+  
+
+  .details-subtitle {
+    font-size: 1.8rem;
+    font-weight: 800;
+    margin: 30px 20px 10px 30px;
+    color: #2f2e2e;
+    justify-content: flex-start;
+    display: flex;
+  }
+  
+/* Style for each individual section (Albums and Top Tracks) */
+
+  .bottom-toptracks {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 5 items in a column */
+    gap: 20px; /* Space between items */
+    width: 100%;
+    margin: 20px 30px;
+  }
+  
+  .bottom-toptracks-body {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    text-align: center;
+    border-radius: 20px;
+    background: #4883b3;
+    width: 83%;
+  }
+
+  .bottom-toptracks-body:hover {
+    transform: scale(1.05);
+    transition: .2s ease-in-out;
+  }
+  
+
+/* Container for each section with horizontal scrolling */
+.bottom-albums, 
+.bottom-relatedAlbums, 
+.bottom-relatedArtists, 
+.bottom-relatedPlaylists, 
+.bottom-relatedTracks {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  gap: 20px;
+  overflow-x: auto;
+  padding-bottom: 10px;
+  scroll-behavior: smooth;
+  background: #99b9f3;
+  border-radius: 10px;
+}
+
+/* Style for each item container */
+.bottom-albums-body,
+.bottom-relatedAlbum-body,
+.bottom-relatedArtist-body,
+.bottom-relatedPlaylist-body,
+.bottom-relatedTrack-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 180px; /* Ensure each item has a consistent width */
+  text-align: center;
+  flex-shrink: 0; /* Prevent items from shrinking */
+}
+
+.bottom-albums-body:hover,
+.bottom-relatedAlbum-body:hover,
+.bottom-relatedArtist-body:hover,
+.bottom-relatedPlaylist-body:hover,
+.bottom-relatedTrack-body:hover {
+    transform: scale(1.05);
+    transition: .2s ease-in-out;
+}
+/* Add a max width so only 5 items are shown on the screen */
+.bottom-albums,
+.bottom-relatedAlbums,
+.bottom-relatedArtists,
+.bottom-relatedPlaylists,
+.bottom-relatedTracks {
+  max-width: calc(5 * 180px + 4 * 20px); /* 5 items with a 20px gap */
+}
+
+/* Hide the scrollbar on small devices but still allow scrolling */
+.bottom-albums::-webkit-scrollbar,
+.bottom-relatedAlbums::-webkit-scrollbar,
+.bottom-relatedArtists::-webkit-scrollbar,
+.bottom-relatedPlaylists::-webkit-scrollbar,
+.bottom-relatedTracks::-webkit-scrollbar {
+  display: none;
+}
+
+  .bottom-body-img {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    margin-left: 10px;
+  }
+  
+  .bottom-relatedArtists .bottom-body-img {
+    border-radius: 50%;
+
+  }
+
+  .bottom-body-title {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 5px;
+    color: #161616;
+    text-overflow: ellipsis;
+  }
+  
+  .bottom-body-artists {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #414040;
+  }
+
+  .bottom-body-top-track {
+    flex-direction: column;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding-left: 30px;
+  }
+  
+  /* Responsive styling for smaller screens */
+  @media (max-width: 800px) {
+
+  
+    .bottom-albums, 
+    .bottom-relatedAlbums, 
+    .bottom-relatedArtists, 
+    .bottom-relatedPlaylists, 
+    .bottom-relatedTracks {
+      width: auto;
+      height: auto;
+    }
+  
+  }
+  
+  

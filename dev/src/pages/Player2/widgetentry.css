@@ -1,0 +1,37 @@
+
+.entry-body {
+    display: flex;
+    width: 100%;
+    gap: 5px;
+    margin-top: 5%;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.entry-image {
+    height: 50px;
+    width: 50px;
+    border-radius: 15px;
+    margin-right: 10px;
+}
+
+.entry-right-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.entry-title {
+    font-weight: 700;
+    font-size: 16px;
+    color: #c9d0e3;
+    margin: 0px 0px 5px;
+}
+
+.entry-subtitle {
+    font-weight: 400;
+    font-size: 12px;
+    color: #c4d0e37c;
+    margin: 0;
+}

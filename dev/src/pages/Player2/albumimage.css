@@ -1,0 +1,36 @@
+
+.albumImage-body { 
+    width: 80%;
+    align-items: center;
+    justify-content: center;
+    position:relative;
+    margin-left: 50px;
+    margin-top: 25px;
+    z-index: 1;
+}
+.albumImage-body img{
+    border-radius: 30px;
+    width: 100%;
+    aspect-ratio: 1;
+}
+
+.albumImage-shadow {
+    -webkit-filter: blur(10px);
+    filter: blur(10px);
+    width: 90%;
+    position: absolute;
+    z-index: -1;
+    top: 18px;
+    right: 7px;
+}
+
+@media (max-width: 1600px) {
+    .albumImage-body {
+        width: 60%;
+        max-width: 300px;
+        margin-top: 20px;
+    }
+
+    
+}
+

@@ -1,0 +1,102 @@
+
+.queue-container {
+    width: 100%;
+    height: 400px;
+    border-radius: 30px;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+    background-color: #3e61d2;
+    opacity: 1;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 15px;
+}
+
+.queue {
+    height: 85%;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 80%;
+}
+
+.upNext {
+    font-size: 20px;
+    font-weight: 700;
+    color: #fff;
+    text-align: left;
+    margin: 12px 40px;
+}
+
+.queue-list {
+    height: 80%;
+    width: 100%;
+    overflow-y: scroll;
+}
+.queue-list::-webkit-scrollbar {
+    display: none;
+  }
+
+.track-name {
+    width: 75%;
+    text-overflow: ellipsis;
+}
+
+.queue-item {
+    justify-content: space-between;
+    width: 100%;
+    padding: 4px 0px;
+    font-size: 12px;
+    font-weight: 400;
+    color: #fff;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.queue-item p {
+    margin: 0;
+    margin-left: 30px;
+    display: inline-flex;
+}
+
+.queue-item:hover {
+    transform: scale(0.95);
+}
+
+/* Items should be size smaller and text should be wrap down */
+
+/* Medium screen (≤ 1200px) */
+@media (max-width: 1498px) {
+    .queue-item {
+        font-size: 12px;
+        padding: 6px 4px;
+    }
+
+    .queue-item p {
+        margin-left: 20px;
+        font-size: 12px;
+    }
+
+    .track-name {
+        width: 70%;
+    }
+}
+
+@media (max-width: 1000px) {
+    .queue {
+        height: 500px;
+    }
+    .queue-item {
+        font-size: 11px;
+        padding: 6px 2px;
+    }
+
+    .queue-item p {
+        margin-left: 15px;
+        font-size: 11px;
+    }
+
+    .track-name {
+        width: 65%;
+    }
+}

@@ -1,0 +1,75 @@
+/* body, html {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    font-family: Arial, sans-serif;
+}
+.container {
+    display: flex;
+    width: 100%;
+}
+.left, .right .top, .right .bottom {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+.left {
+    width: 50%;
+    background-color: #4CAF50;
+    color: white;
+}
+.right {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+}
+.top, .bottom {
+    height: 50%;
+    background-color: #2196F3;
+    color: white;
+}
+.bottom {
+    background-color: #f44336;
+} */
+
+
+/* Update Modal */
+.update-modal {
+    width: 100%;
+    height: 50%;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+
+.update-modal-header {
+    background: #3196c4;
+}
+
+.update-modal-body {
+    background: #95cce5;
+}
+
+.update-modal-formgroup {
+    display: flex;
+    flex-direction: row;
+}
+
+.update-modal-formgroup .label {
+    font-size: 18px;
+    gap: 20px;
+}
+
+.update-modal-formgroup .input {
+    border-radius: 20px;
+}
+
+.update-modal-btn {
+    background: #1d5d8a;
+    color: #ffffff;
+}
+
+.update-modal-footer {
+    background: #3d96be;
+}

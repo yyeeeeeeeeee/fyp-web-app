@@ -1,0 +1,96 @@
+.app-logo {
+    margin-left: 20px;
+    width: 100%;
+    max-width: 120px;
+    height: auto;
+    object-fit: contain;
+    border-radius: 12px;
+}
+
+.navbar {
+    background-color: #468bd4;
+    padding: 20px;
+    font-size:18px;
+    height: 120px;
+    display: flex;
+    align-items: center;
+    font-weight: 500;
+}
+
+.navbar .nav-link {
+    color: #D1F8EF !important;
+    text-decoration: none !important;
+}
+
+.navbar .navbar-login {
+    background-color: #003df3;
+    width: 10vh;
+    border-radius: 6px;
+    text-align: center;
+    margin-right: 20px;
+    box-shadow: none;
+}
+
+.navbar .navbar-login :hover {
+    background-color: rgb(226, 234, 255);
+    border-radius: 6px;
+    border: none;
+    box-shadow: none !important;
+    color: #003df3 !important;
+}
+
+.nav-dropdown {
+    color: #000000;
+    margin-right: 20px;
+}
+
+.profile-img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.navbar-features {
+    display: flex;
+    align-items: center;
+    gap: 20px; /* Space between items */
+    margin-left: 30px;
+}
+
+
+/* === RESPONSIVE STYLING === */
+
+/* Below 1300px, slightly tighten layout */
+@media (max-width: 1299px) {
+
+    .navbar-features {
+        gap: 16px;
+    }
+
+    .navbar-search {
+        margin-left: 20px;
+    }
+
+    .profile-img {
+        width: 50px;
+        height: 50px;
+    }
+}
+
+/* Below 955px, collapse some features */
+@media (max-width: 954px) {
+
+    .navbar-features {
+        display: none !important;
+    }
+
+}
+
+@media (max-width: 615px) {
+    
+    .navbar-search {
+        display: none;
+    }
+
+}

@@ -1,0 +1,100 @@
+.signup-page {
+    background-color: #d3e8fe;
+    min-height: calc(100vh - 120px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    flex-direction: column;
+    padding: 70px 0;
+}
+
+.signup-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.signup-card {
+    border-radius: 16px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    padding: 40px 30px;
+    width: 100%;
+    max-width: 800px;
+    font-size: 18px;
+    text-align: start;
+    animation: popup-fade-in 0.4s ease-in-out;
+}
+
+.signup-card .card-header {
+    font-size: 1.8rem;
+    font-weight: bold;
+    text-align: center;
+    border-bottom: none;
+    background: none !important;
+}
+
+.signup-form {
+    margin: 20px 0;
+}
+
+.signup-card .form-label {
+    font-weight: 500;
+}
+
+.signup-card .form-control {
+    border: 1px solid #555;
+}
+
+.signup-card .form-control:focus {
+    box-shadow: 0 0 0 0.2rem rgba(255, 255, 255, 0.1);
+}
+
+.signup-card .signup-form .input-group .btn {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    margin-top: 0;
+}
+
+.signup-card .text-danger {
+    font-size: 0.95rem;
+    margin-top: 10px;
+}
+
+.signup-card .link-label {
+    color: #89c9ff;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.signup-card .link-label:hover {
+    text-decoration: underline;
+}
+
+.signup-btn {
+    width: 200px;
+    padding: 12px 30px;
+    text-align: center;
+    background-color: #FEFEFE;
+    border-radius: 10px;
+    color: #1f1f1f;
+    font-weight: 600;
+    margin-top: 10px;
+}
+
+.signup-btn:hover {
+    background-color: #e5e5e5;
+}
+
+@keyframes popup-fade-in {
+    0% {
+        transform: scale(0.9);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
