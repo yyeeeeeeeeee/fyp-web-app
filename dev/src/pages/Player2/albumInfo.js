@@ -3,9 +3,14 @@ import "./albuminfo.css";
 
 function AlbumInfo({album}) {
     const artists = [];
-    album?.artists?.forEach((element) => {
-        artists.push(element.name);
-    });
+    if(album?.artists?.length > 1){
+        album?.artists?.forEach((element) => {
+            artists.push(element.name);
+        });
+    } else {
+        artists.push(album?.artists?.name);
+    }
+    
 
     return (
         <div className="albumInfo-card">
@@ -15,10 +20,10 @@ function AlbumInfo({album}) {
                 </div>
             </div> 
             <div className="album-info">
-                <p>{`${album?.name} is an ${album?.album_type} by ${artists?.join(", ")} with ${album?.total_tracks} track(s)`}</p>
+                <p>{`${album?.name} is an ${album?.album_type || "art"} by ${artists?.join(", ")} with ${album?.total_tracks || album?.length} track(s)`}</p>
             </div> 
             <div className="album-release">
-                <p>Release Date: {album?.release_date}</p>
+                <p>Release Date: {album?.release_date || ""}</p>
             </div> 
         </div> 
     )

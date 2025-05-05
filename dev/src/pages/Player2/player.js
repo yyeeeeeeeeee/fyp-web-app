@@ -14,53 +14,55 @@ function Player() {
     const [currentIndex, setCurrentIndex] = useState(0);
     const [isLoading, setIsLoading] = useState(true);
 
-    
-    useEffect(() => {
-        // const fetchData = async () => {
-        //     try {
-        //         const response = await fetch(`http://localhost:5000/api/spotify/album-info/${location.state?.id}`);
-        //         const data = await response.json();
-        //         if (!response.ok) {
-        //             console.log("Album info not found");
-        //         } else {
-        //             setTracks(new Array(data));  // Assuming 'tracks' is the key in your response
-        //             setCurrentTrack(data);
-        //         }
-        //     } catch (error) {
-        //         console.error("Error fetching data:", error);
-        //     }
-        // };
+    const ownPlaylist = location?.state?.playlist || null;
 
-        if (location.state && location.state.type === "playlist") {
-            apiClient.get(`playlists/${location.state?.id}/tracks`)
-                .then(res => {
+    useEffect(() => {
+        const fetchData = async () => {
+            if (!location.state) return;
+    
+            const type = location.state.type;
+            const id = location.state.playId;
+            const typeHandlers = {
+                playlist: async () => {
+                    const res = await apiClient.get(`playlists/${id}/tracks`);
                     setTracks(res.data.items);
                     setCurrentTrack(res.data.items[0].track);
-                });
-        } else if (location.state && location.state.type === "album") {
-            //fetchData();
-            apiClient.get(`albums/${location.state?.id}`)
-                .then(res => {
-                   setTracks(new Array(res.data)); // Assuming 'tracks' is the key in your response
-                   setCurrentTrack(res.data);
-                });
-        } else if (location.state && location.state.type === "track") {
-            //fetchData();
-            apiClient.get(`tracks/${location.state?.id}`)
-                .then(res => {
-                   setTracks(new Array(res.data)); // Assuming 'tracks' is the key in your response
-                   setCurrentTrack(res.data);
-                });
-        } 
-        setIsLoading(false);
-        
-
+                },
+                album: async () => {
+                    const res = await apiClient.get(`albums/${id}`);
+                    setTracks([res.data]);
+                    setCurrentTrack(res.data);
+                },
+                track: async () => {
+                    const res = await apiClient.get(`tracks/${id}`);
+                    setTracks([res.data]);
+                    setCurrentTrack(res.data);
+                },
+                own: () => {
+                    setTracks(ownPlaylist.tracks);
+                    setCurrentTrack(ownPlaylist.tracks[0]);
+                }
+            };
+    
+            try {
+                await typeHandlers[type]?.();
+            } catch (error) {
+                console.error("Error fetching data:", error);
+            } finally {
+                setIsLoading(false);
+            }
+        };
+    
+        fetchData();
     }, [location.state]);
 
 
     useEffect(() => {
         if (tracks && tracks.length === 1) {
             setCurrentTrack(tracks[currentIndex]); //unchanged
+        }
+        else if (tracks && tracks.length > 0 && location.state.type === "own") {
+            setCurrentTrack(tracks[currentIndex]);
         }
         else if (tracks && tracks.length > 0 && tracks[currentIndex]) {
             setCurrentTrack(tracks[currentIndex].track);
@@ -83,7 +85,12 @@ function Player() {
                 ) : (
                     <div>Loading audio...</div>
                 )}
-                <Widgets artistID={currentTrack?.album?.artists?.[0]?.id || currentTrack?.artists?.[0]?.id} />
+                <Widgets artistID={
+                    currentTrack?.album?.artists?.[0]?.id || 
+                    currentTrack?.artists?.[0]?.id || 
+                    currentTrack?.artists?.artistID
+                    } 
+                />
             </div>
             <div className="right-player-body">
                 {currentTrack && (

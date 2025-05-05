@@ -54,7 +54,7 @@ class spotifyController {
             }       
             res.json(tracks);
         } catch(error) {
-            res.status(500).json({error: "Failed to fetch playlists."});
+            res.status(500).json({error: "Failed to fetch tracks."});
         }
     }
 

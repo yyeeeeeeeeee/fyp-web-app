@@ -29,8 +29,8 @@ import spotipy.util as util
 
 
 #If you're not familiar with this, save it! Makes using jupyter notebook on laptops much easier
-from IPython.core.display import display, HTML
-display(HTML("<style>.container { width:90% !important; }</style>"))
+# from IPython.core.display import display, HTML
+# display(HTML("<style>.container { width:90% !important; }</style>"))
 
 #another useful command to make data exploration easier
 # NOTE: if you are using a massive dataset, this could slow down your code.

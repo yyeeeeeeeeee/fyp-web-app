@@ -127,7 +127,7 @@ function AudioPlayer({ currentTrack, currentIndex, setCurrentIndex, total }) {
     };
 
     const artists = [];
-    currentTrack?.album?.artists.forEach((artist) => {
+    currentTrack?.album?.artists?.forEach((artist) => {
         artists.push(artist.name);
     });
     if (artists === null) {
@@ -142,7 +142,7 @@ function AudioPlayer({ currentTrack, currentIndex, setCurrentIndex, total }) {
                 <ProgressCircle
                     percentage={currentPercentage}
                     isPlaying={true}
-                    image={currentTrack?.album?.images[0]?.url || currentTrack?.images[0]?.url}
+                    image={currentTrack?.album?.images?.[0]?.url || currentTrack?.images?.[0]?.url || currentTrack?.image }
                     size={300}
                     color="#C968"
                 />

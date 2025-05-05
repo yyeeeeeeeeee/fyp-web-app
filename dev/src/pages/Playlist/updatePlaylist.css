@@ -1,39 +1,205 @@
 
-.center-form {
+.update-playlist-container {
+    width: 100%;
+    height: 100%;
+    margin: 3% 1%;
+}
+
+.update-playlist-container h1 {
+    background: #386cbb;
+    height: 70px;
+    border-radius: 20px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    align-items: center;
+    justify-content: flex-start;
     display: flex;
-    flex-direction: column;
+    padding-left: 5%;
+    color: #c7ecf7;
+    margin-bottom: 0;
+    width: 90%;
+}
+
+.update-playlist-body {
     align-items: center;
     justify-content: center;
-    height: 90vh;
+    flex-direction: column;
 }
 
-.center-form Form {
-    max-width: 400px;
+.update-playlsit-form {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: row;
+    width: 90%;
+    background: #8fafdf;
+    padding-bottom: 2%;
+    border: #202bf6;
+}
+
+.update-playlist-container Form {
     width: 100%;
+}
+
+.update-playlist-container Form div {
+    align-items: flex-start;
+    justify-content: flex-start;
+    display: flex;
     padding: 20px;
-    border: 1px solid #ccc;
-    background-color: #fff;
-    border-radius: 5px;
-    box-shadow: 0 2px rgba(0,0,0,0.1);
-    text-align: center;
+    gap: 5%;
 }
 
-.center-form Form Label {
+
+.update-playlist-container Form Label {
     font-weight: bold;
+    align-items: flex-start;
+    justify-content: flex-start;
+    display: flex;
+    padding-top: 5px;
+    padding-left: 50px;
+    width: 30%;
+    font-size: 18px;
 }
 
-.center-form Form .form-control {
-    margin-bottom: 20px;
+.update-playlist-container Form .form-control {
+    margin-right: 50px;
     padding: 10px;
+    width: 100%;
 }
 
-.center-form Form .btn {
-    background-color: black;
+.update-playlist-container Form .btn {
+    background-color: rgb(10, 35, 160);
+    max-width: 66.5%;
     color: #fff;
     border: none;
-    padding: 10px 0;
+    padding: 10px;
+    margin-left: 22%;
 }
 
-.center-form Form .btn:hover {
-    background-color: grey;
+.update-playlist-container Form .btn:hover {
+    background-color: rgba(22, 139, 212, 0.8);
+}
+
+.add-tracks-container{
+    width: 90%;
+    background: #386cbb;
+    padding: 3% 2%;
+    border-radius: 20px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+
+.add-tracks-search-btn {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: 35%;
+    padding-bottom: 20px;
+}
+
+.add-tracks-search-box {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    height: 100%;
+    background: #fff;
+    border-radius: 5px;
+}
+
+.current-tracks {
+    width: 90%;
+}
+
+.current-tracks .track-header {
+    color: #000;
+    font-size: 18px;
+    font-weight: bold;
+    background: #386cbb;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.current-tracks-in-list,
+.add-tracks-search-box .add-tracks-search-list {
+    width: 100%;
+    height: 100%;
+    border-radius: 20px;
+    border-top-right-radius: 0;
+    border-top-left-radius: 0;
+}
+
+.add-tracks-search-box  .add-tracks-div-header {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: row;
+    gap: 50px;
+    padding-top: 10px;
+    padding-left: 30px;
+    background: #6b98db;
+    border-radius: 5px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.add-tracks-search-box  .add-tracks-div-header p {
+    color: #000;
+    font-weight: 700;
+    justify-content: center;
+    align-items: center;
+}
+
+.current-tracks-in-list .current-track-div,
+.add-tracks-search-box .add-track-div {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 30px;
+    padding: 0 30px;
+    cursor: pointer;
+    height: 80px;
+}
+
+.current-tracks-in-list .current-track-div:checked,
+.add-tracks-search-box .add-track-div:checked {
+    background-color: #7ddba5;
+}
+
+.current-tracks-in-list .current-track-div:nth-child(odd),
+.add-tracks-search-box .add-track-div:nth-child(odd) {
+    background: #b5caf0;
+}
+
+.current-tracks-in-list .current-track-div:nth-child(even),
+.add-tracks-search-box .add-track-div:nth-child(even) {
+    background: #d9e3f5;
+}
+
+.current-tracks-in-list .current-track-div:hover,
+.add-tracks-search-box .add-track-div:hover {
+    background: #5581e0;
+    transition: .2s ease-in-out;
+}
+
+.current-tracks-in-list .numbering,
+.add-tracks-search-box .numbering {
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.current-tracks-in-list .current-track-list,
+.add-tracks-search-box .add-tracks-list {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+}
+
+.current-tracks-in-list .current-track-list p,
+.add-tracks-search-box .add-tracks-list p {
+    font-size: 16px;
+    font-weight: 500;
+    color: #000;
 }

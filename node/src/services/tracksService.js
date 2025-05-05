@@ -7,10 +7,22 @@ class TrackService {
         return await Track.findById(trackId);
     }
 
-    // save new track
-    async saveTrack(trackId, name, artistId, albumId) {
-        const newTrack = new Track({trackId, name, artistId, albumId});
-        return await newTrack.save();
+    // save new tracks
+    async saveTracks(saveTracks) {
+        const newTracks = [];
+
+        for (const track of saveTracks) {
+            const exists = await Track.findOne({ trackId: track.trackId });
+            if (!exists) {
+                newTracks.push(track);
+            }
+        }
+
+        if (newTracks.length > 0) {
+            return await Track.insertMany(newTracks);
+        } else {
+            return []; // or null if you prefer
+        }
     }
 
 };

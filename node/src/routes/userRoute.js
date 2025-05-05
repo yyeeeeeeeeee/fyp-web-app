@@ -12,6 +12,6 @@ router.get("/firebase/:uid", userController.getUserByUID);
 
 router.patch("/:id", userController.editUser); //update user
 
-router.delete("/:id", userController.deleteUser); //delete user
+router.patch("/delete/:id", userController.deleteUser); //delete user
 
 module.exports = router;

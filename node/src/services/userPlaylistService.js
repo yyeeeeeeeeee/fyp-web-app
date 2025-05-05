@@ -10,13 +10,13 @@ class UserPlaylistService {
         return await newPlaylist.save();
     }
 
-    // display playlists
+    // find an user playlists
     async getUserPlaylistsByUserId(userId) {
         return await userPlaylist.find({ userId }); // Find playlists by user
         //return await userPlaylist.find({ userId: new mongoose.Types.ObjectId(userId) });
     }
 
-    // display a playlist???
+    // find a playlist details
     async getUserPlaylistById(playlistId) {
         return await userPlaylist.find({ playlistId }); // Find playlist
     }

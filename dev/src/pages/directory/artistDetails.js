@@ -113,21 +113,21 @@ function ArtistDetails({ userId }) {
 
     const handleNextAlbum = (data) => {
         if (id)
-            navigate(`/u/${id}/player`,{state: {id: data.id, type: "album"}});
+            navigate(`/u/${id}/player`,{state: {playId: data.id, type: "album"}});
         else
             navigate(`/login`);
     }
 
     const handleNextTrack = (data) => {
         if (id)
-            navigate(`/u/${id}/player`,{state: {id: data.id, type: "track"}});
+            navigate(`/u/${id}/player`,{state: {playId: data.id, type: "track"}});
         else
             navigate(`/login`);
     }
 
     const handleNextPlaylist = (data) => {
         if (id)
-            navigate(`/u/${id}/player`,{state: {id: data.id, type: "playlist"}});
+            navigate(`/u/${id}/player`,{state: {playId: data.id, type: "playlist"}});
         else
             navigate(`/login`);
     }

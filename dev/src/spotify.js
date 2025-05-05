@@ -43,11 +43,30 @@ const apiClient = axios.create({
     baseURL: "https://api.spotify.com/v1/",
 });
 
+let interceptorId = null;
+
 export const setClientToken = (token) => {
-    apiClient.interceptors.request.use(async function(config) {
-        config.headers.Authorization = "Bearer " + token;
+    // Remove previous interceptor if it exists
+    if (interceptorId !== null) {
+        apiClient.interceptors.request.eject(interceptorId);
+    }
+
+    interceptorId = apiClient.interceptors.request.use((config) => {
+        config.headers.Authorization = `Bearer ${token}`;
         return config;
     });
 };
+
+// export const setClientToken = (token) => {
+//     apiClient.interceptors.request.use(async function(config) {
+//         config.headers.Authorization = "Bearer " + token;
+//         return config;
+//     });
+// };
+
+// export const setClientToken = (token) => {
+//     apiClient.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+// };
+
 
 export default apiClient;

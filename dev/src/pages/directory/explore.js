@@ -17,7 +17,12 @@ function Explore({ userId }) {
     useEffect(() => {
         const fetchAllData = async () => {
             try {
-                const response = await fetch(`http://localhost:5000/api/artists/`);
+                const response = await fetch(`http://localhost:5000/api/artists/`, {
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json",
+                    }
+                });
                 const data = await response.json();
                 if (data)
                     setArtists(data);
@@ -31,7 +36,7 @@ function Explore({ userId }) {
 
 
     useEffect(() => {
-        if (artists) {
+        if (artists && artists.length > 0) {
             // from artists to join artistID by , to ids
             const ids = artists.map(artist => artist.artistID).join(',');
 

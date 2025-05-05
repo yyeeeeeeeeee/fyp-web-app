@@ -3,6 +3,20 @@ const artistService = require("../services/artistService");
 
 class ArtistController {
 
+    async saveArtists(req, res) {
+        try {
+            const artistList = req.body.artistList;
+            const artists = await artistService.saveArtists(artistList);
+            
+            res.status(200).json({
+                message: "Artists saved successfully",
+                savedArtists: artists,
+            });
+        } catch (error) {
+            res.status(500).json({error: error.message});
+        }
+    }
+
     async getAllArtists(req, res) {
         try {
             const artists = await artistService.getAllArtists();

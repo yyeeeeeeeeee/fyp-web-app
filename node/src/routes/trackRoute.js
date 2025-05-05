@@ -4,13 +4,13 @@ const trackController = require("../controllers/trackController");
 
 const router = express.Router();
 
-router.post("/", trackController.saveTrack);
+router.post("/tracks", trackController.saveTracks);
 
-router.get("/", trackController.getTrackById);
+router.get("/track/:id", trackController.getTrackById);
 
 router.get("/playlist/:id", trackController.getTracksControl);
 
-router.post("/playlist/:id/track/:id", trackController.saveTrackControl);
+router.post("/save-playlist", trackController.saveTracksControl);
 
 router.delete("/playlist/:id", trackController.deletePlaylistControl);
 

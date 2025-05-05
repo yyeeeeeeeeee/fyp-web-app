@@ -21,9 +21,9 @@ function NavBar({notifications, allUsers, userChats, markAllNotificationsAsRead,
   const handleSearch = (searchInput) => {
     if (searchInput.trim() !== "") {
       if (id && searchInput)
-        navigate(`/u/${id}/search?q=${encodeURIComponent(searchInput)}`, {state: {searchInput: searchInput}});
+        navigate(`/u/${id}/search?q=${encodeURIComponent(searchInput)}`);
       else
-        navigate(`/search?q=${encodeURIComponent(searchInput)}`, {state: {searchInput: searchInput}}); // Pass search input via URL
+        navigate(`/search?q=${encodeURIComponent(searchInput)}`); // Pass search input via URL
     }
   };
 
@@ -62,16 +62,19 @@ function NavBar({notifications, allUsers, userChats, markAllNotificationsAsRead,
   useEffect(() => {
     const fetchImg = async () => {
       try {
-        const id = localStorage.getItem('userId');
-        
-        const response = await fetch(`http://localhost:5000/api/user/${id}`);
+        const response = await fetch(`http://localhost:5000/api/user/${id}`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+            },
+        });
         const data = await response.json();
         const img = data.image || null;
 
         if (img === null) {
-          apiClient.get("me").then(response => {
-            setImage(response?.data?.images[0]?.url);
-          })
+          const res = await apiClient.get("me");
+          const result = await res.json();
+          setImage(result?.images[0]?.url);
         }
         setImage(img);
   
@@ -79,10 +82,8 @@ function NavBar({notifications, allUsers, userChats, markAllNotificationsAsRead,
         console.error("Error fetching user image:", error.message);
       }
     };
-
-    fetchImg();
-
-  },[]);
+    if (id && isLoggedIn) fetchImg();
+  },[id, isLoggedIn]);
 
   return (
     <Nav className="navbar" variant="underline" defaultActiveKey="home">
@@ -160,9 +161,6 @@ function NavBar({notifications, allUsers, userChats, markAllNotificationsAsRead,
               >
                 <NavDropdown.Item as={Link} to={`/u/${id}/profile`}>
                   <PersonFill /> Profile
-                </NavDropdown.Item>
-                <NavDropdown.Item as={Link} to={`/u/${id}/dashboard`}>
-                  Dashboard
                 </NavDropdown.Item>
                 <NavDropdown.Divider />
                 <NavDropdown.Item

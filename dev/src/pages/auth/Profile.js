@@ -1,21 +1,19 @@
-import { Container,  Image, Col, Row} from 'react-bootstrap';
+import { Container, Image, Col, Row } from 'react-bootstrap';
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from "react-router-dom";
 import { Modal, ModalHeader, ModalBody, ModalFooter, Button, FormGroup } from 'reactstrap';
 
 import Library from '../Library/library';
 import PlaylistDashboard from "../Playlist/playlistDashboard";
-
 import { auth, AuthDB } from "./firebase";
+import { deleteUser } from 'firebase/auth';
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { toast } from "react-toastify";
-
-
 import "./profile.css";
+import { Trash } from 'react-bootstrap-icons';
 
-function UserProfile() {
-  const { id } = useParams();
-
+function UserProfile({ userId }) {
+  const  id  = userId || localStorage.getItem("userId");
   const [editingField, setEditingField] = useState('');
   const [formData, setFormData] = useState({
     username: "",
@@ -25,7 +23,7 @@ function UserProfile() {
   });
   const [tempData, setTempData] = useState({ ...formData });
   const [toggleUpdateModal, setToggleUpdateModal] = useState(false);
-  const toggleModal = () => {setToggleUpdateModal(prev => !prev)};
+  const toggleModal = () => { setToggleUpdateModal(prev => !prev) };
   const [selectedFile, setSelectedFile] = useState(null);
 
   const [userDetails, setUserDetails] = useState(null);
@@ -35,7 +33,12 @@ function UserProfile() {
   // MongoDb 
   const fetchUser = async () => {
     try {
-      const response = await fetch(`http://localhost:5000/api/user/${id}`);  // ✅ Use `userId`
+      const response = await fetch(`http://localhost:5000/api/user/${id}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });  // ✅ Use `userId`
       const data = await response.json();
       setFormData({
         username: data.username || "", // Ensure non-undefined default
@@ -47,28 +50,6 @@ function UserProfile() {
     }
   };
 
-  // const handleEdit = (field) => {
-  //   setEditingField(field);
-  //   setTempData({ ...formData }); // Store current data as temp backup
-  // };
-
-  // const handleInputChange = (event) => {
-  //   const { name, value } = event.target;
-  //   setFormData({
-  //     ...formData,
-  //     [name]: value,
-  //   });
-  // };
-
-  // const handleSave = () => {
-  //   setFormData({ ...tempData });
-  //   setEditingField('');
-  // };
-
-  // const handleCancel = () => {
-  //   setEditingField('');
-  //   setTempData({ ...formData }); // Revert changes
-  // };
 
   // firebase Auth
   const fetchUserData = async () => {
@@ -103,8 +84,8 @@ function UserProfile() {
   const updateInfo = (file, userData) => {
     const reader = new FileReader();
     reader.onloadend = async () => {
-    const base64Str = reader.result.split(',')[1];
-    const contentType = file.type;
+      const base64Str = reader.result.split(',')[1];
+      const contentType = file.type;
       try {
         const res = await fetch(`http://localhost:5000/api/user/${userData._id}`, {
           method: "PATCH",
@@ -114,7 +95,7 @@ function UserProfile() {
           body: JSON.stringify({
             _id: userData._id,
             username: userData.username,
-            email: userData.email, 
+            email: userData.email,
             image: base64Str,
             contentType: contentType
           })
@@ -126,7 +107,7 @@ function UserProfile() {
           updateAuthData(base64Str);
           console.log("Firebase auth updated successfully");
           window.location.reload();
-        }    
+        }
 
       } catch (error) {
         console.error("Updated failed: ", error);
@@ -150,50 +131,67 @@ function UserProfile() {
     });
   };
 
+  const handleDeleteAcc = async () => {
+    try {
+      // Step 1: Soft delete in MongoDB (backend API call)
+      await fetch(`http://localhost:5000/api/user/delete/${id}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ isDeleted: true }), // or whatever soft delete logic you use
+      });
+
+      // Step 2: Delete from Firebase Auth
+      const user = auth.currentUser;
+      if (user) {
+        await deleteUser(user);
+      }
+
+      alert("Account deleted successfully.");
+      localStorage.clear();
+      window.location.href = "/"; // redirect or logout
+    } catch (error) {
+      console.error("Failed to delete account:", error.message);
+      if (error.code === 'auth/requires-recent-login') {
+        alert("Please re-authenticate to delete your account.");
+      }
+    }
+  };
 
   return (
-    <Container fluid className="p-0 m-0">
-      <Row className="p-0 m-0" style={{ backgroundColor: "rgba(212, 222, 234, 0.6)" }}>
+    <Container fluid className="profile-main-container">
+      <Row className="profile-main-container-body">
         {/* Full Width Content */}
-        <Col className="p-0" style={{ backgroundColor: "#f8f9fa", minHeight: "100vh" }}>
+        <Col className="profile-main-body">
           <Container fluid className="d-flex justify-content-center" style={{ padding: "0" }}>
             {/* Main Container for Banner + Info */}
             <Container style={{ width: "95%", padding: "0" }}>
               {/* Background Image */}
-              <div style={{ position: "relative", height: "300px", overflow: "hidden", minWidth: "600px" }}>
-                <div className='profile-background' style={{ backgroundColor: "#4774b2", width: "100%", height: "100%", objectFit: "cover"}}></div>
+              <div className='profile-body'>
+                <div className='profile-background'>
+                  <div className='profile-delete-btn' onClick={() => handleDeleteAcc()}>
+                    <Trash size={25} />
+                  </div>
+                </div>
                 {/* Overlay User Info Section */}
-                <Container
-                  style={{
-                    position: "absolute",
-                    bottom: "30px",  // Slight overlap with banner
-                    left: "50%",
-                    transform: "translateX(-50%)",
-                    width: "80%",
-                    backgroundColor: "rgba(255, 255, 255, 0.9)",
-                    borderRadius: "10px",
-                    padding: "15px",
-                    zIndex: 2,
-                    textAlign: "center",
-                    boxShadow: "0 4px 15px rgba(0, 0, 0, 0.2)"
-                  }}
-                >
+                <Container className='profile-info-container'>
                   <Row className="align-items-start">
                     <Col xs="auto">
-                    <div style={{width:"80px", height:"80px"}}>
-                      <Image
-                        src={formData.image}
-                        rounded
-                        style={{ width: "100%", height: "100%", objectFit: "cover", display:"block" }}
-                        alt="User Image"
-                      />
-                    </div>
+                      <div style={{ width: "80px", height: "80px" }}>
+                        <Image
+                          src={formData.image || null}
+                          rounded
+                          style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+                          alt="User Image"
+                        />
+                      </div>
                     </Col>
                     <Col style={{ textAlign: "left", paddingTop: "15px" }}>
                       <h5>{formData.username}</h5>
                     </Col>
                     <Col>
-                      <Button className='btn btn-primary' style={{marginTop:"20px"}} onClick={() =>toggleModal()}>Edit Info</Button>
+                      <Button className='edit-btn' onClick={() => toggleModal()}>Edit Info</Button>
                     </Col>
                   </Row>
                 </Container>
@@ -206,8 +204,8 @@ function UserProfile() {
                 <Library />
               </Container>
               <Container>
-              <h3>Database Playlists</h3>
-                <PlaylistDashboard />
+                <h3>Saved Collections</h3>
+                <PlaylistDashboard userId={id} />
               </Container>
             </Container>
           </Container>
@@ -215,54 +213,54 @@ function UserProfile() {
       </Row>
 
       <Modal className="update-modal" isOpen={toggleUpdateModal} toggle={toggleModal}>
-      <ModalHeader className="update-modal-header" toggle={toggleModal}>Edit Info</ModalHeader>
-      <ModalBody className="update-modal-body">
-        <FormGroup className="update-modal-formgroup">
-          <label>Username</label>
-          <input
-            name="username"
-            value={formData.username}
-            onChange={(e) =>
-              setFormData({ ...formData, username: e.target.value })
-            }
-          />
-        </FormGroup>
+        <ModalHeader className="update-modal-header" toggle={toggleModal}>Edit Info</ModalHeader>
+        <ModalBody className="update-modal-body">
+          <FormGroup className="update-modal-formgroup">
+            <label>Username</label>
+            <input
+              name="username"
+              value={formData.username}
+              onChange={(e) =>
+                setFormData({ ...formData, username: e.target.value })
+              }
+            />
+          </FormGroup>
 
-        <FormGroup className="update-modal-formgroup">
-          <label>Email</label>
-          <input
-            name="email"
-            value={formData.email}
-            onChange={(e) =>
-              setFormData({ ...formData, email: e.target.value })
-            }
-          />
-        </FormGroup>
+          <FormGroup className="update-modal-formgroup">
+            <label>Email</label>
+            <input
+              name="email"
+              value={formData.email}
+              onChange={(e) =>
+                setFormData({ ...formData, email: e.target.value })
+              }
+            />
+          </FormGroup>
 
-        <FormGroup className="update-modal-formgroup">
-          <label>Upload Profile Image</label>
-          <input
-            type="file"
-            onChange={(e) => setSelectedFile(e.target.files[0])}
-          />
-        </FormGroup>
-      </ModalBody>
+          <FormGroup className="update-modal-formgroup">
+            <label>Upload Profile Image</label>
+            <input
+              type="file"
+              onChange={(e) => setSelectedFile(e.target.files[0])}
+            />
+          </FormGroup>
+        </ModalBody>
 
-      <ModalFooter className='update-modal-footer'>
-        <Button
-        className='update-modal-btn'
-          onClick={() => {
-            if (selectedFile) {
-              updateInfo(selectedFile, { _id: id, username: formData.username, email: formData.email });
-            }
-            toggleModal();
-          }}
-        >
-          Update
-        </Button>
-        <Button className='update-modal-btn' onClick={()=>toggleModal()}>Cancel</Button>
-      </ModalFooter>
-    </Modal>
+        <ModalFooter className='update-modal-footer'>
+          <Button
+            className='update-modal-btn'
+            onClick={() => {
+              if (selectedFile) {
+                updateInfo(selectedFile, { _id: id, username: formData.username, email: formData.email });
+              }
+              toggleModal();
+            }}
+          >
+            Update
+          </Button>
+          <Button className='update-modal-btn' onClick={() => toggleModal()}>Cancel</Button>
+        </ModalFooter>
+      </Modal>
 
     </Container>
   );

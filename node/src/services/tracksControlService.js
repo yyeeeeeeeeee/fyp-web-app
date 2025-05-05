@@ -3,10 +3,24 @@ const TrackControl = require("../models/playlist_tracks_control");
 
 class TrackControlService {
 
-    // add track to a playlist
-    async addTrackToPlaylist(playlistId, trackId) {
-        const newTrackPlaylist = new TrackControl({playlistId, trackId});
-        return await newTrackPlaylist.save();
+    // add tracks to a playlist
+    async addTracksToPlaylist(trackPlaylistLinks) {
+        const newTrackControl = [];
+
+        for (const control of trackPlaylistLinks) {
+            const exists = await TrackControl.findOne({ 
+                playlistId: new mongoose.Types.ObjectId(control.playlistId), trackId: control.trackId 
+            });
+            if (!exists) {
+                newTrackControl.push(control);
+            }
+        }
+
+        if (newTrackControl.length > 0) {
+            return await TrackControl.insertMany(newTrackControl);
+        } else {
+            return []; // or null if you prefer
+        }
     }
 
     // retrieve a playlist's tracks 

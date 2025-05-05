@@ -9,17 +9,17 @@ function Library() {
   const [playlists, setPlaylists] = useState(null);
 
   useEffect(() => {
-    apiClient.get("me/playlists").then(function(response) {
-        setPlaylists(response.data.items);
-        //console.log(response.data.items);
-      });
-
+    const fetchData = async() => {
+      const res = await apiClient.get("me/playlists");
+      setPlaylists(res.data.items);
+    }
+    fetchData();
   },[]);
 
   const navigate = useNavigate();
   const { id } = useParams();
   const playPlaylist = (playlistId) => {
-    navigate(`/u/${id}/player`,{state: {id: playlistId, type: "playlist"}});
+    navigate(`/u/${id}/player`,{state: {playId: playlistId, type: "playlist"}});
   }
 
   return(

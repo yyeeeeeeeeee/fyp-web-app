@@ -8,5 +8,7 @@ router.get("/", artistController.getAllArtists);
 
 router.get("/:id", artistController.getArtistById);
 
+router.post("/save-artists", artistController.saveArtists);
+
 
 module.exports = router;

@@ -21,7 +21,6 @@ class UserPlaylistController {
                 return res.status(404).json({error: "User Playlists not found"});
             if (!playlists.length)  
                 return res.status(200).json([]);  // empty array instead of error        
-            console.log(playlists);
             res.status(200).json(playlists);
         } catch (error) {
             res.status(500).json({error: error.message});

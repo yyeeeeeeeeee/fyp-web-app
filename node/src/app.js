@@ -11,25 +11,17 @@ const http = require("http");
 
 
 // ----- ROUTES -----
-// ## SPOTIFY 
 const spotifyRoutes = require("./api/routes/spotifyRoute");
-// const playerAuth = require("./api/routes/playerAuth"); //webplayer sdk
-// const authRoutes = require("./api/routes/auth");
 const spotifyAuthRoutes = require("./api/routes/spotifyAuth");
 const previewRoutes = require("./api/routes/previewRoute");
-
-
 const userRoutes = require("./routes/userRoute");
 const playlistRoutes = require("./routes/playlistRoute");
 const accRoutes = require("./routes/accRoutes");
 const trackRoutes = require("./routes/trackRoute");
 const artistRoutes = require("./routes/artistRoute");
-
+const aggregateRoute = require("./routes/aggregateRoute");
 const chatRoutes = require("./routes/chatRoute");
 const messageRoutes = require("./routes/messageRoute");
-
-// ## RECOMMENDATION
-const recommendRoutes = require("./recommendation/recommendRoute");
 
 
 // ----- INITIALIZE -----
@@ -53,7 +45,7 @@ app.use("/api/user", userRoutes);
 
 app.use("/api/playlist", playlistRoutes);
 app.use("/api/playlist-tracks", trackRoutes);
-
+app.use("/api/playlists-data", aggregateRoute);
 app.use("/api/artists", artistRoutes);
 
 // CHAT
@@ -63,9 +55,6 @@ app.use("/api/messages", messageRoutes);
 // SPOTIFY API
 // app.use("/",playerAuth);
 app.use('/api/spotify',spotifyRoutes);
-
-//RECOMMENDATION ROUTE
-app.use("/",recommendRoutes);
 
 // GET PREVIEW URL ROUTE
 app.use("/api/song", previewRoutes);

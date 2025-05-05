@@ -1,4 +1,4 @@
-import { searchArtistAlbums, searchPlaylists, searchTracks } from "./SpotifyAPI";
+
 import { Container, Row, Card, Navbar, Nav } from "react-bootstrap";
 import { useEffect, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";

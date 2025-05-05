@@ -8,15 +8,10 @@ passlib[bcrypt]
 PyJWT
 python-decouple
 python-multipart
-
-fastapi
-uvicorn
 pandas
 numpy
 spotipy
 scikit-learn
 python-dotenv
 matplotlib
-spotipy
 scikit-image
-ipython

@@ -1,93 +1,79 @@
 import { useEffect, useState } from "react";
 import { Card, Container, Image, Row, Col } from "react-bootstrap";
-import { useParams, useLocation } from "react-router-dom";
+import { useParams, useLocation, useNavigate } from "react-router-dom";
 import { PencilSquare, PlayCircleFill, PlusSquare, Share } from "react-bootstrap-icons";
+import "./playlistdetails.css";
 
-function PlaylistDetails() {
-    const {id} = useParams();
+function PlaylistDetails({userId}) {
+    const  id  = userId || localStorage.getItem("userId");
     const location = useLocation();
-    const playlistId = location.state.playlistId;
-    const [tracks,setTracks] = useState([]);
-    const [owner, setOwner] = useState(null);
+    const navigate = useNavigate();
+    const playlist = location.state.playlist;
 
-    useEffect(()=> {
+    const handleAccessPlaylist = (playlist) => {
+        navigate(`/u/${id}/player`, { state: { playlist: playlist, type: "own" } });
+    }
 
-        const fetchPlaylistItems = async() => {
-            try {
-                const response = await fetch(`http://localhost:5000/api/playlist-tracks/playlist/${playlistId}`);
-                const data = await response.json();
-                if (!data.success)
-                    console.log("Tracks no found in this playlist");
-                setTracks(data);
-            } catch (error) {
-                console.error("Failed fetching tracks of this playlist: ", error);
-            }
-        }
+    const handleAccessTrack = (track) => {
+        navigate(`/u/${id}/player`, { state: { playId: track.trackId, type: "track" } });
+    }
 
-        const fetchOwnerInfo = async() => {
-            try {
-                const response = fetch(`http://localhost:5000/api/user/${id}`);
-                const data = response.json();
-                if (!data.success)
-                    setOwner("Unknown");
-                setOwner(data.name);
-            } catch (error) {
-                console.error("Failed fetching owner: ", error);
-            }
-        }
+    const handleEdit = (playlist) => {
+        navigate(`/u/${id}/playlist/${playlist._id}`, { state: { playlist: playlist } });
+    }
 
-        fetchOwnerInfo();
-        fetchPlaylistItems();
-    },[id, playlistId]);
-
-    console.log(tracks);
     return (
-        <Container>
-            <div className="playlist-header mb-4 position-relative">
-                <Image 
-                    className="playlist-background w-100 position-absolute top-0 start-0 z-n1" 
-                    src="/sea.jpg" 
-                    style={{ height: "200px",opacity: "0.4" }}
-                    alt="Playlist background"
-                />
-                <div className="playlist-info mt-5 p-5 position-relative">
+        <div className="playlist-detail-container">
+            <div className="playlist-header">
+                <div className="playlist-info">
                     <Row className="align-items-flex-start">
                         <Col xs="auto">
-                            <Image  
-                                className="mt-4"
-                                src="/sea.jpg" 
-                                style={{ height: "80px", width: "80px", borderRadius: "8px" }}
-                                alt="Playlist Image"
-                            />
+                            <div className="playlist-cover-grid">
+                                {playlist?.tracks.slice(0, 4).map((track, index) => (
+                                    <img
+                                        key={index}
+                                        src={track.image}
+                                        alt={`track-${index}`}
+                                        className="playlist-cover-img"
+                                    />
+                                ))}
+                            </div>
                         </Col>
-                        <Col className="text-start p-4">
-                            <h2 >{ "Playlist Name"}</h2>
-                            <p className="text-start me-2" style={{color:"black"}}>Created by <strong>{owner}</strong></p>
+                        <Col className="playlist-info-bar">
+                            <p className="playlist-name">{playlist?.name}</p>
+                            <p className="playlist-desc">{playlist?.description}</p>
                         </Col>
                         <Col xs="auto" className="text-end">
-                            <PencilSquare role="button" className="text-end mb-4" size={20} />
+                            <PencilSquare role="button" className="text-end mb-4" size={20} 
+                                onClick={() => handleEdit(playlist)}
+                            />
                             <div></div>
-                            <PlayCircleFill size={50} className="text-end me-2" role="button" />
+                            <PlayCircleFill size={50} className="text-end me-2" role="button" 
+                                onClick={() => handleAccessPlaylist(playlist)}
+                            />
                         </Col>
                     </Row>
                 </div>
             </div>
 
-            <div className="playlist-tracks">
-            {tracks?.map((track, index) => (
-                    <Card key={track.id} className="track-card d-flex flex-row align-items-center p-2 mb-5 border-bottom">
-                        <Card.Text className="text-muted me-3">#{index + 1}</Card.Text>
-                        <Card.Img src={track.image || "#"} alt="Track Image" className="me-3" style={{ height: "60px", width: "60px" }} />
-                        <div className="flex-grow-1">
-                            <Card.Text className="fw-bold mb-0">{track.name}</Card.Text>
-                            <Card.Text className="text-muted">Artist Name</Card.Text>
+            <div className="playlist-tracks-container">
+                <div className="playlist-tracks-header">
+                    Tracks
+                </div>
+                {playlist?.tracks?.map((track, index) => (
+                    <Card key={track?.id || index} className="track-card" onClick={() => handleAccessTrack(track)} >
+                        <Card.Text className="playlist-track-idx"># {index + 1}</Card.Text>
+                        <Card.Img src={track?.image} alt="Track Image" className="track-image me-3" />
+                        <div className="track-info">
+                            <Card.Text className="track-name">{track?.name}</Card.Text>
+                            <Card.Text className="track-artist">{track?.artist?.name}</Card.Text>
                         </div>
-                        <PlayCircleFill size={30} className="text-success" role="button" />
+                        <PlayCircleFill size={60} className="to-play-btn" role="button" />
                     </Card>
                 ))}
-                
+
             </div>
-        </Container>
+        </div>
     );
 }
 

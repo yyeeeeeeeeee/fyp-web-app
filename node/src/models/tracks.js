@@ -12,7 +12,8 @@ const trackSchema = new mongoose.Schema({
     trackId: String,
     name: String,
     artistId: String, // artist's spotify id for fetching later
-    albumId: String // storing album id to get the track in which album for fetching later
+    albumId: String, // storing album id to get the track in which album for fetching later
+    image: String,
 });
 
 const Track = mongoose.model("Track", trackSchema);

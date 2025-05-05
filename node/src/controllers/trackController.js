@@ -18,12 +18,17 @@ class TrackController {
         }
     }
 
-    async saveTrackControl(req, res) {
+    async saveTracksControl(req, res) {
         try {
-            const playlistId = req.params.playlistId;
-            const {trackId} = req.body;
-            const newTrackControl = await trackControlService.addTrackToPlaylist(playlistId,trackId);
-            res.json(newTrackControl);
+            const {playlistId, trackIds} = req.body;
+
+            const trackPlaylistLinks = trackIds.map(trackId => ({
+                playlistId,
+                trackId
+            }));
+
+            const newTrackControl = await trackControlService.addTracksToPlaylist(trackPlaylistLinks);
+            res.status(200).json({message: "Tracks saved successfully", newTrackControl});
         } catch(error) {
             res.status(500).json({error: error.message});
         }
@@ -59,11 +64,12 @@ class TrackController {
         }
     }
 
-    // Track table controller
-    async saveTrack(req, res) {
+    // Save Tracks
+    async saveTracks(req, res) {
         try{
-            const {trackId, name, artistId, albumId} = req.body;
-            const saveTrackData = await trackService.saveTrack(trackId, name, artistId, albumId);
+            const {tracksList} = req.body;
+
+            const saveTrackData = await trackService.saveTracks(tracksList);
             res.json(saveTrackData);
         } catch(error) {
             res.status(500).json({error: error.message});

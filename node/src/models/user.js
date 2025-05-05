@@ -10,6 +10,7 @@ const userSchema = new mongoose.Schema({
         unique: true,
     },
     image: {data: Buffer, contentType: String},
+    isDeleted: Boolean,
 }, {timestamps: true});
 
 const User = mongoose.model("User", userSchema);
