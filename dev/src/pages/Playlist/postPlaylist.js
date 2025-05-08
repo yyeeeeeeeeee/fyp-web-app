@@ -44,7 +44,7 @@ function PostPlaylist({userId}) {
 
     const saveArtists = async () => {
         try {
-            const response = await fetch("http://localhost:5000/api/artists/save-artists", {
+            const response = await fetch("https://fyp-web-app-sgso.onrender.com/api/artists/save-artists", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -61,7 +61,7 @@ function PostPlaylist({userId}) {
 
     const saveTracks = async () => {
         try {
-            const response = await fetch(`http://localhost:5000/api/playlist-tracks/tracks`, {
+            const response = await fetch(`https://fyp-web-app-sgso.onrender.com/api/playlist-tracks/tracks`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -80,7 +80,7 @@ function PostPlaylist({userId}) {
 
     const connectTrackWithPlaylist = async (playlistId) => {
         try {
-            const response = await fetch(`http://localhost:5000/api/playlist-tracks/save-playlist`, {
+            const response = await fetch(`https://fyp-web-app-sgso.onrender.com/api/playlist-tracks/save-playlist`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -104,7 +104,7 @@ function PostPlaylist({userId}) {
 
     const handleSearch = async (searchInput) => {
         try {
-            const response = await fetch(`http://localhost:5000/api/spotify/tracks?searchInput=${searchInput}`, {
+            const response = await fetch(`https://fyp-web-app-sgso.onrender.com/api/spotify/tracks?searchInput=${searchInput}`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
@@ -130,7 +130,7 @@ function PostPlaylist({userId}) {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await fetch(`http://localhost:5000/api/playlist`, {
+            const response = await fetch(`https://fyp-web-app-sgso.onrender.com/api/playlist`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
