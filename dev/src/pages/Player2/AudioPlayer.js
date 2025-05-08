@@ -24,7 +24,7 @@ function AudioPlayer({ currentTrack, currentIndex, setCurrentIndex, total }) {
     // fetching preview url
     const fetchPreviewURL = async () => {
         try {
-            const response = await fetch(`http://localhost:5000/api/song/preview?songname=${encodeURIComponent(songSrc)}`);  // Use `userId
+            const response = await fetch(`https://fyp-web-app-sgso.onrender.com/api/song/preview?songname=${encodeURIComponent(songSrc)}`);  // Use `userId
             const data = await response.json();
             if (!response.ok) {
                 console.log("Error fetching new releases data");
