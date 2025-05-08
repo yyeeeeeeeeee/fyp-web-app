@@ -1,4 +1,4 @@
-export const baseURL = "http://localhost:5000/api";
+export const baseURL = "https://fyp-web-app-sgso.onrender.com/api";
 // https://fyp-web-app-sgso.onrender.com
 
 export const postRequest = async (URL, body) => {
