@@ -37,7 +37,7 @@ import axios from "axios";
 // export const loginEndpoint = `${authEndpoint}client_id=${clientID}&redirect_uri=${redirectURI}&scope=${scopes.join("%20")}&response_type=token&show_dialog=true`;
 
 // NEW: Point to your backend login route
-export const loginEndpoint = "http://localhost:5000/api/auth/login";
+export const loginEndpoint = "https://fyp-web-app-sgso.onrender.com/api/auth/login";
 
 const apiClient = axios.create({
     baseURL: "https://api.spotify.com/v1/",
