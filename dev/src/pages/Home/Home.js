@@ -2,8 +2,9 @@ import { Container, InputGroup, FormControl, Button, Image, Card, Row, Col } fro
 import { useRef, useState, useEffect } from 'react';
 import Nav from 'react-bootstrap/Nav';
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { Compass, ChatDots, ChevronLeft, ChevronRight } from 'react-bootstrap-icons';
+import { Compass, ChatDots, ChevronLeft, ChevronRight, MusicNote, MusicNoteBeamed } from 'react-bootstrap-icons';
 import "./home.css";
+import ProgressCircle from '../Player2/ProgressCircle';
 
 function Home() {
   const { id } = useParams();
@@ -122,9 +123,9 @@ function Home() {
     if (recomPlaylists && Object.keys(recomPlaylists).length > 0) {
       const firstKey = Object.keys(recomPlaylists)[0];
       const firstPlaylist = recomPlaylists[firstKey];
-  
+
       setFirstPlaylsit(firstPlaylist);
-  
+
       const generalTop20 = firstPlaylist?.top40?.slice(0, 20) || [];
       setGeneralTop20(generalTop20);
     }
@@ -142,19 +143,31 @@ function Home() {
   return (
     <div style={{ display: 'flex', minHeight: '100vh', overflow: "hidden" }}>
       {/* Left Sidebar */}
-      <div className="sidebar-component" style={{ backgroundColor: "#1A1A2E", padding: "20px 0px", width: "250px", flexShrink: 0 }}>
+      <div className="sidebar-component" style={{ backgroundColor: "#1e2a3e", padding: "25px 0px", width: "230px", flexShrink: 0 }}>
+      <ProgressCircle
+          // className="home-progress-circle"
+          percentage={0}
+          isPlaying={true}
+          image={null}
+          size={200}
+          color="#62e7fe"
+        />
         <Container className='sidebar'>
 
           {/* Space Div for Top Padding */}
-          <div style={{ height: '40px', borderBottom: '2px solid #3B3E47' }}></div>
+          <div className='marquee'>
+            <MusicNote size={15} />
+            ...Before The Night Ends...
+            <MusicNoteBeamed size={15} />
+          </div>
 
-          <Col className="bg-dark text-white p-4" style={{ width: '100%' }}>
+          <Col className="sidebar-explore text-white p-5" style={{ width: '100%' }}>
             <Nav className="text-center flex-column" style={{ gap: '20px', fontSize: '18px' }}>
               {
                 (id !== undefined) ?
                   <div>
                     <Nav.Link as={Link} to={`/u/${id}/explore`} className="custom-nav-item"><Compass /> Explore Libraries </Nav.Link>
-                    <Nav.Link as={Link} to={`/u/${id}/social`} className="custom-nav-item"><ChatDots /> Social Everywhere</Nav.Link>
+                    <Nav.Link as={Link} to={`/u/${id}/social`} className="custom-nav-item-chat"><ChatDots /> Let's Chat</Nav.Link>
                   </div> :
                   <div>
                     <Nav.Link as={Link} to={`/explore`} className="custom-nav-item"><Compass /> Explore Libraries </Nav.Link>

@@ -103,6 +103,9 @@ function NavBar({notifications, allUsers, userChats, markAllNotificationsAsRead,
       <Nav.Item>
         <Nav.Link as={Link} to={id ? `/u/${id}/explore` : "/explore"}>Directories</Nav.Link>
       </Nav.Item>
+      <Nav.Item>
+        <Nav.Link as={Link} to={id ? `/u/${id}/playlist-dashboard` : null}>Playlists</Nav.Link>
+      </Nav.Item>
       {/* <NavDropdown title="Libraries" className="nav-dropdown">
         <NavDropdown.Item eventKey="4.1">Action</NavDropdown.Item>
         <NavDropdown.Item eventKey="4.2">Another action</NavDropdown.Item>

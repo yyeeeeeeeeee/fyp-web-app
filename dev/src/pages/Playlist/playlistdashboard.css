@@ -11,6 +11,7 @@
 
 .custom-playlist-card {
     position: relative;
+    padding-top: 20px;
     border: none;
     border-radius: 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);

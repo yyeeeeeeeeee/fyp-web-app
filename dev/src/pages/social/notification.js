@@ -20,7 +20,7 @@ function Notification({userId, notifications, userChats, allUsers, markAllNotifi
     return (
         <div className="notifications">
             <div className="notifications-icon" onClick={() => setIsOpen(!isOpen)}>
-                <BellFill size={20} width={20} height={20}/>
+                <BellFill size={30} width={25} height={25}/>
                 {unreadNotifications?.length === 0 ? null : (
                     <span className="notification-count">
                         <span>{unreadNotifications?.length}</span>
