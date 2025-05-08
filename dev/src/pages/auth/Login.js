@@ -78,7 +78,7 @@ function Login() {
 
     const handleLoginDB = async (uid, data) => {
         try {
-            const response = await fetch("http://localhost:5000/api/u/login", {
+            const response = await fetch("https://fyp-web-app-sgso.onrender.com/api/u/login", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
