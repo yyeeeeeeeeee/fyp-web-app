@@ -105,7 +105,7 @@ function SignUp() {
 
     const handleRegisterDB = async (user, data) => {
         try {
-            const response = await fetch("http://localhost:5000/api/u/register", {
+            const response = await fetch("https://fyp-web-app-sgso.onrender.com/api/u/register", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
