@@ -33,7 +33,7 @@ function UserProfile({ userId }) {
   // MongoDb 
   const fetchUser = async () => {
     try {
-      const response = await fetch(`http://localhost:5000/api/user/${id}`, {
+      const response = await fetch(`https://fyp-web-app-sgso.onrender.com/api/user/${id}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -87,7 +87,7 @@ function UserProfile({ userId }) {
       const base64Str = reader.result.split(',')[1];
       const contentType = file.type;
       try {
-        const res = await fetch(`http://localhost:5000/api/user/${userData._id}`, {
+        const res = await fetch(`https://fyp-web-app-sgso.onrender.com/api/user/${userData._id}`, {
           method: "PATCH",
           headers: {
             "Content-Type": "application/json",
@@ -134,7 +134,7 @@ function UserProfile({ userId }) {
   const handleDeleteAcc = async () => {
     try {
       // Step 1: Soft delete in MongoDB (backend API call)
-      await fetch(`http://localhost:5000/api/user/delete/${id}`, {
+      await fetch(`https://fyp-web-app-sgso.onrender.com/api/user/delete/${id}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
