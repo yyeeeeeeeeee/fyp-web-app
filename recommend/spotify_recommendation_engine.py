@@ -171,7 +171,7 @@ def get_spotify_client():
         scope='user-library-read playlist-read-private playlist-read-collaborative',
         client_id=client_id,
         client_secret=client_secret,
-        redirect_uri='http://127.0.0.1:3000/'
+        redirect_uri='https://btne.vercel.app/'   #'http://127.0.0.1:3000/'
     )
     return spotipy.Spotify(auth=token, requests_timeout=10)
 
