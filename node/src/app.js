@@ -30,7 +30,7 @@ const PORT = process.env.PORT || 5000;
 
 app.use(bodyParser.json());
 app.use(cors({
-    origin: "http://localhost:3000", // React frontend
+    origin: ["http://localhost:3000","https://btne.vercel.app"], // React frontend
     credentials: true,
   }));  
 // app.listen(PORT, () => {
@@ -71,7 +71,7 @@ app.use("/uploads", express.static(path.join(__dirname, "public", "uploads")));
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: "http://localhost:3000", // your frontend
+    origin: ["http://localhost:3000","https://btne.vercel.app"], // your frontend
     credentials: true,
     }
 });
