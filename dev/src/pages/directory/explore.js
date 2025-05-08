@@ -17,7 +17,7 @@ function Explore({ userId }) {
     useEffect(() => {
         const fetchAllData = async () => {
             try {
-                const response = await fetch(`http://localhost:5000/api/artists/`, {
+                const response = await fetch(`https://fyp-web-app-sgso.onrender.com/api/artists/`, {
                     method: "GET",
                     headers: {
                         "Content-Type": "application/json",
@@ -42,7 +42,7 @@ function Explore({ userId }) {
 
             const fetchData = async () => {
                 try {
-                    const response = await fetch(`http://localhost:5000/api/spotify/artists/${encodeURIComponent(ids)}`);
+                    const response = await fetch(`https://fyp-web-app-sgso.onrender.com/api/spotify/artists/${encodeURIComponent(ids)}`);
                     const data = await response.json();
                     if (data)
                         setArtistsData(data);
