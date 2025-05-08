@@ -32,7 +32,7 @@ function App() {
       if (storedRefreshToken) {
         try {
           const response = await fetch(
-            `http://localhost:5000/api/auth/refresh_token?refresh_token=${storedRefreshToken}`
+            `https://fyp-web-app-sgso.onrender.com/auth/refresh_token?refresh_token=${storedRefreshToken}`
           );
           const data = await response.json();
           console.log("refresh: ", data);
