@@ -110,7 +110,7 @@ const Social = ({ userId, setNotificationsGlobal, setAllUsersGlobal,
   useEffect(() => {
     const getUsers = async () => {
       try {
-        const response = await fetch('http://localhost:5000/api/user/');
+        const response = await fetch('https://fyp-web-app-sgso.onrender.com/api/user/');
         const users = await response.json();
         if (response.error) {
           console.log("Error fetching users: ", users);
