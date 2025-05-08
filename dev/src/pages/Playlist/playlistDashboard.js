@@ -13,7 +13,7 @@ function DisplayPlaylist({userId}) {
 
     const getAllPlaylistsData = async() => {
         try {
-            const respsone = await fetch(`http://localhost:5000/api/playlists-data/${id}`, {
+            const respsone = await fetch(`https://fyp-web-app-sgso.onrender.com/api/playlists-data/${id}`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -29,7 +29,7 @@ function DisplayPlaylist({userId}) {
 
     const fetchPlaylist = async () => {
         try {
-            const response = await fetch(`http://localhost:5000/api/playlist/u/${id}`,{
+            const response = await fetch(`https://fyp-web-app-sgso.onrender.com/api/playlist/u/${id}`,{
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -63,7 +63,7 @@ function DisplayPlaylist({userId}) {
     const handleDelete = async (playlistId) => {
         try {
             if (window.confirm("Do you want to delete this playlist?")) {
-                const response = await fetch(`http://localhost:5000/api/playlist/${playlistId}`, {
+                const response = await fetch(`https://fyp-web-app-sgso.onrender.com/api/playlist/${playlistId}`, {
                 method: "DELETE",
                 headers: {
                     "Content-Type": "application/json",
