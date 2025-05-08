@@ -18,7 +18,7 @@ function ArtistDetails({ userId }) {
     useEffect(() => {
         const fetchTopTracks = async () => {
             try {
-                const response = await fetch(`http://localhost:5000/api/spotify/a/${artistsData.id}`);
+                const response = await fetch(`https://fyp-web-app-sgso.onrender.com/api/spotify/a/${artistsData.id}`);
                 const data = await response.json();
                 if (data)
                     setTopTracks(data);
@@ -32,7 +32,7 @@ function ArtistDetails({ userId }) {
     useEffect(() => {
         const fetchAlbums = async () => {
             try {
-                const response = await fetch(`http://localhost:5000/api/spotify/a/albums/${artistsData.id}`);
+                const response = await fetch(`https://fyp-web-app-sgso.onrender.com/api/spotify/a/albums/${artistsData.id}`);
                 const data = await response.json();
                 if (data)
                     setAlbums(data.items);
@@ -47,7 +47,7 @@ function ArtistDetails({ userId }) {
     useEffect(() => {
         const fetchRelatedAlbumData = async () => {
             try {
-                const response = await fetch(`http://localhost:5000/api/spotify/related-albums?artistName=${artistsData.name}`);
+                const response = await fetch(`https://fyp-web-app-sgso.onrender.com/api/spotify/related-albums?artistName=${artistsData.name}`);
                 const data = await response.json();
                 if (data)
                     setRelatedAlbums(data.items);
@@ -62,7 +62,7 @@ function ArtistDetails({ userId }) {
     useEffect(() => {
         const fetchRelatedArtistData = async () => {
             try {
-                const response = await fetch(`http://localhost:5000/api/spotify/related-artists?artistName=${artistsData.name}`);
+                const response = await fetch(`https://fyp-web-app-sgso.onrender.com/api/spotify/related-artists?artistName=${artistsData.name}`);
                 const data = await response.json();
                 if (data)
                     setRelatedArtists(data.items);
@@ -77,7 +77,7 @@ function ArtistDetails({ userId }) {
     useEffect(() => {
         const fetchRelatedPlaylistData = async () => {
             try {
-                const response = await fetch(`http://localhost:5000/api/spotify/related-playlists?artistName=${artistsData.name}`);
+                const response = await fetch(`https://fyp-web-app-sgso.onrender.com/api/spotify/related-playlists?artistName=${artistsData.name}`);
                 const data = await response.json();
                 if (data)
                     setRelatedPlaylists(data.items);
@@ -92,7 +92,7 @@ function ArtistDetails({ userId }) {
     useEffect(() => {
         const fetchRelatedTrackData = async () => {
             try {
-                const response = await fetch(`http://localhost:5000/api/spotify/related-tracks?artistName=${artistsData.name}`);
+                const response = await fetch(`https://fyp-web-app-sgso.onrender.com/api/spotify/related-tracks?artistName=${artistsData.name}`);
                 const data = await response.json();
                 if (data)
                     setRelatedTracks(data.items);
