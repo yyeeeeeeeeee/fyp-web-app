@@ -8,7 +8,7 @@ export const useFetchRecipientUser = (chat, user) => {
     useEffect(() => {
         const getUser = async () => {
             if (!recipientId) return null;
-            const response = await fetch(`http://localhost:5000/api/user/${recipientId}`);
+            const response = await fetch(`https://fyp-web-app-sgso.onrender.com/api/user/${recipientId}`);
             const data = await response.json();
             if (response.error) {
                 setError(data);
