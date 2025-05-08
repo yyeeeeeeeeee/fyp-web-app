@@ -25,7 +25,7 @@ function Home() {
   useEffect(() => {
     const fetchNewReleases = async () => {
       try {
-        const response = await fetch("http://localhost:5000/api/spotify/new-releases");  // Use `userId
+        const response = await fetch("https://fyp-web-app-sgso.onrender.com/api/spotify/new-releases");  // Use `userId
         const data = await response.json();
         if (!response.ok)
           console.log("Error fetching new releases data");
@@ -91,7 +91,7 @@ function Home() {
           setRecomPlaylists(JSON.parse(cachedData)); // Use cached recommendations
           return;
         }
-        const response = await fetch("http://localhost:8000/recommendations"); //get customized recommendations
+        const response = await fetch("https://fyp-web-app-recommend.onrender.com/recommendations"); //get customized recommendations
         const data = await response.json();
 
         if (!response.ok) throw new Error("Response not OK");
