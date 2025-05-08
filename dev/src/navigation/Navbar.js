@@ -62,7 +62,7 @@ function NavBar({notifications, allUsers, userChats, markAllNotificationsAsRead,
   useEffect(() => {
     const fetchImg = async () => {
       try {
-        const response = await fetch(`http://localhost:5000/api/user/${id}`, {
+        const response = await fetch(`https://fyp-web-app-sgso.onrender.com/api/user/${id}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
