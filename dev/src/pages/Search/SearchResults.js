@@ -27,7 +27,7 @@ function SearchResults({userId}) {
 
   const handleAlbums = async (searchInput) => {
     try {
-      const response = await fetch(`http://localhost:5000/api/spotify/artistablums?searchInput=${searchInput}`, {
+      const response = await fetch(`https://fyp-web-app-sgso.onrender.com/api/spotify/artistablums?searchInput=${searchInput}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -43,7 +43,7 @@ function SearchResults({userId}) {
 
   const handlePlaylists = async (searchInput) => {
     try {
-      const response = await fetch(`http://localhost:5000/api/spotify/playlists?searchInput=${searchInput}`, {
+      const response = await fetch(`https://fyp-web-app-sgso.onrender.com/api/spotify/playlists?searchInput=${searchInput}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -58,7 +58,7 @@ function SearchResults({userId}) {
   }
   const handleTracks = async (searchInput) => {
     try {
-      const response = await fetch(`http://localhost:5000/api/spotify/tracks?searchInput=${searchInput}`, {
+      const response = await fetch(`https://fyp-web-app-sgso.onrender.com/api/spotify/tracks?searchInput=${searchInput}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
