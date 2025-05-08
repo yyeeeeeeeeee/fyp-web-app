@@ -13,6 +13,7 @@ class PlaylistRequest(BaseModel):
 origins = [
     "http://localhost:3000",
     "http://127.0.0.1:3000",
+    "https://btne.vercel.app"
     # Add more origins here
 ]
 
