@@ -26,7 +26,7 @@ const Social = ({ userId, setNotificationsGlobal, setAllUsersGlobal,
   const [allUsers, setAllUsers] = useState([]);
 
   useEffect(() => {
-    const newSocket = io("http://localhost:5000");
+    const newSocket = io("https://fyp-web-app-sgso.onrender.com"); //http://localhost:5000
     setSocket(newSocket);
 
     return () => {
